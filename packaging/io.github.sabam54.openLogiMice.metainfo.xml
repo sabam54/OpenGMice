@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.sabam54.openLogiMice</id>
+  <name>openLogiMice</name>
+  <summary>Configure Logitech G mice on Linux</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <developer id="io.github.sabam54">
+    <name>openLogiMice contributors</name>
+  </developer>
+  <description>
+    <p>
+      openLogiMice sets up Logitech G gaming mice on Linux. It talks to the mouse directly
+      over the HID++ 2.0 protocol and stores the settings in the mouse's on-board memory, so
+      they keep working without the app running.
+    </p>
+    <ul>
+      <li>DPI levels with default and DPI-shift level, separate X/Y, live preview</li>
+      <li>Report rate</li>
+      <li>Button assignments: mouse buttons, key combinations, media keys, DPI and profile actions</li>
+      <li>Logo lighting effects on mice that have it</li>
+      <li>On-board profiles, battery and device information</li>
+      <li>Several mice at once, over USB, Bluetooth or a LIGHTSPEED/Unifying receiver</li>
+    </ul>
+    <p>
+      This is an independent project, not affiliated with or endorsed by Logitech.
+      Access to the mouse needs a udev rule on the host: run "flatpak run io.github.sabam54.openLogiMice udev-rule".
+    </p>
+  </description>
+  <url type="homepage">https://github.com/sabam54/openLogiMice</url>
+  <url type="bugtracker">https://github.com/sabam54/openLogiMice/issues</url>
+  <url type="vcs-browser">https://github.com/sabam54/openLogiMice</url>
+  <launchable type="desktop-id">io.github.sabam54.openLogiMice.desktop</launchable>
+  <provides>
+    <binary>openlogimice</binary>
+  </provides>
+  <categories>
+    <category>Settings</category>
+    <category>HardwareSettings</category>
+  </categories>
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+  </supports>
+  <content_rating type="oars-1.1"/>
+  <releases>
+    <release version="0.1.0" date="2026-11-08">
+      <description>
+        <p>First release: tested on the G305 X SUPERLIGHT (Bluetooth) and the G305 (LIGHTSPEED).</p>
+      </description>
+    </release>
+  </releases>
+</component>

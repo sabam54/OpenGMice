@@ -1,0 +1,57 @@
+# Build:  flatpak run org.flatpak.Builder --user --install --force-clean build-dir io.github.sabam54.openLogiMice.yml
+# Bundle: see packaging/build-flatpak.sh
+id: io.github.sabam54.openLogiMice
+runtime: org.kde.Platform
+runtime-version: '6.11'
+sdk: org.kde.Sdk
+base: io.qt.PySide.BaseApp
+base-version: '6.11'
+command: openlogimice
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=all            # /dev/hidraw* (HID++ access to the mouse); --device=input does not cover hidraw
+build-options:
+  env:
+    BASEAPP_REMOVE_WEBENGINE: '1'
+    BASEAPP_DISABLE_NUMPY: '1'
+cleanup-commands:
+  - /app/cleanup-BaseApp.sh
+cleanup:
+  - /include
+  - /mkspecs
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /lib/libclang*
+  - /lib/debug
+  - /bin/shiboken6*
+  - /cleanup-BaseApp*.sh
+modules:
+  - name: openlogimice
+    buildsystem: simple
+    build-commands:
+      - install -Dm644 -t /app/share/openlogimice/openlogimice openlogimice/*.py
+      - python3 -m compileall -q /app/share/openlogimice
+      - install -Dm755 openlogimice.sh /app/bin/openlogimice
+      - install -Dm644 -t /app/share/applications ${FLATPAK_ID}.desktop
+      - install -Dm644 -t /app/share/metainfo ${FLATPAK_ID}.metainfo.xml
+      - install -Dm644 -t /app/share/icons/hicolor/scalable/apps ${FLATPAK_ID}.svg
+      - install -Dm644 -t /app/share/openlogimice 42-openlogimice.rules
+      - install -Dm644 -t /app/share/licenses/${FLATPAK_ID} LICENSE
+    sources:
+      - type: dir
+        path: openlogimice
+        dest: openlogimice
+      - type: file
+        path: packaging/openlogimice.sh
+      - type: file
+        path: packaging/io.github.sabam54.openLogiMice.desktop
+      - type: file
+        path: packaging/io.github.sabam54.openLogiMice.metainfo.xml
+      - type: file
+        path: packaging/io.github.sabam54.openLogiMice.svg
+      - type: file
+        path: 42-openlogimice.rules
+      - type: file
+        path: LICENSE

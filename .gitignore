@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.flatpak-builder/
+.flatpak-build/
+.flatpak-repo/
+*.flatpak
+# personal on-board memory dumps
+backup*.json
+
+# local from-source launcher (contains this PC's path)
+openlogimice.desktop

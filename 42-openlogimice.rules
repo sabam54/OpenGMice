@@ -1,0 +1,3 @@
+# Give the logged-in user access to Logitech HID++ devices (USB, receivers, Bluetooth).
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="046d", TAG+="uaccess"
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", KERNELS=="*:046D:*", TAG+="uaccess"
