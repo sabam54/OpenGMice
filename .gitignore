@@ -9,3 +9,4 @@ backup*.json
 
 # local from-source launcher (contains this PC's path)
 opengmice.desktop
+*.flatpak.sha256
