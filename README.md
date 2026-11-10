@@ -1,4 +1,4 @@
-# openLogiMice
+# OpenGMice
 
 A Linux tool for the mouse settings Logitech G HUB offers on Windows. It talks to the mouse directly over
 Logitech's HID++ 2.0 protocol and stores everything in the mouse's **on-board memory**, so the
@@ -15,7 +15,7 @@ DPI range, button count, profile format, LED zones).
 | **Not supported** | Mice without on-board profiles (MX Master/Anywhere and other office mice), keyboards, headsets, HID++ 1.0 devices, other brands |
 
 Profile formats 1-5 use the layout that libratbag and Solaar use; formats 6-8 use the layout
-verified on this G305 X. If you try another mouse, run `python3 -m openlogimice backup dump.json`
+verified on this G305 X. If you try another mouse, run `python3 -m opengmice backup dump.json`
 first and please report the result.
 
 ## Features
@@ -31,36 +31,36 @@ first and please report the result.
 - **Device**: battery, firmware and connection info.
 
 ## Install (Flatpak)
-1. Download `openLogiMice.flatpak` from the [latest release](https://github.com/sabam54/openLogiMice/releases/latest) and install it (it pulls the KDE runtime from Flathub the first time):
+1. Download `OpenGMice.flatpak` from the [latest release](https://github.com/sabam54/OpenGMice/releases/latest) and install it (it pulls the KDE runtime from Flathub the first time):
    ```bash
-   flatpak install --user openLogiMice.flatpak
+   flatpak install --user OpenGMice.flatpak
    ```
 2. Let your user open the mouse, once per computer, then replug the mouse or its receiver:
    ```bash
-   flatpak run io.github.sabam54.openLogiMice udev-rule | sudo tee /etc/udev/rules.d/42-openlogimice.rules && sudo udevadm control --reload && sudo udevadm trigger
+   flatpak run io.github.sabam54.OpenGMice udev-rule | sudo tee /etc/udev/rules.d/42-opengmice.rules && sudo udevadm control --reload && sudo udevadm trigger
    ```
    If Solaar is installed, its rules already cover this and you can skip the step.
-3. Start "openLogiMice" from the app menu, or `flatpak run io.github.sabam54.openLogiMice`.
-   The command-line tools below work the same way: `flatpak run io.github.sabam54.openLogiMice list`.
+3. Start "OpenGMice" from the app menu, or `flatpak run io.github.sabam54.OpenGMice`.
+   The command-line tools below work the same way: `flatpak run io.github.sabam54.OpenGMice list`.
 
 To build the bundle yourself: `./packaging/build-flatpak.sh` (needs only `flatpak`; it fetches
 `org.flatpak.Builder` and the SDK from Flathub).
 
 ## Run from source
 ```bash
-cd ~/openLogiMice && python3 -m openlogimice        # GUI (needs PySide6)
-python3 -m openlogimice list                       # connected mice
-python3 -m openlogimice info                       # CLI summary (first mouse)
-python3 -m openlogimice -d 4074 info               # pick a mouse by name or product id
-python3 -m openlogimice dpi 1600                   # temporary live DPI (switches to host mode)
-python3 -m openlogimice onboard                    # back to on-board memory mode
-python3 -m openlogimice backup memory.json         # back up on-board memory
-python3 -m openlogimice restore memory.json
+cd ~/OpenGMice && python3 -m opengmice        # GUI (needs PySide6)
+python3 -m opengmice list                       # connected mice
+python3 -m opengmice info                       # CLI summary (first mouse)
+python3 -m opengmice -d 4074 info               # pick a mouse by name or product id
+python3 -m opengmice dpi 1600                   # temporary live DPI (switches to host mode)
+python3 -m opengmice onboard                    # back to on-board memory mode
+python3 -m opengmice backup memory.json         # back up on-board memory
+python3 -m opengmice restore memory.json
 ```
 ## Permissions
 The app needs read/write access to `/dev/hidraw*`. If it says it has no access, install the rule:
 ```bash
-sudo cp 42-openlogimice.rules /etc/udev/rules.d/ && sudo udevadm control --reload && sudo udevadm trigger
+sudo cp 42-opengmice.rules /etc/udev/rules.d/ && sudo udevadm control --reload && sudo udevadm trigger
 ```
 
 ## Privacy & security
@@ -77,7 +77,7 @@ sudo cp 42-openlogimice.rules /etc/udev/rules.d/ && sudo udevadm control --reloa
 - The factory profile lives in read-only ROM and is never written to. "Reset" copies it back.
 - Each written sector carries a CRC and is read back to verify it. A mouse with an invalid sector
   falls back to the ROM profile.
-- `python3 -m openlogimice backup FILE` saves a mouse's on-board memory; `restore FILE` puts it back.
+- `python3 -m opengmice backup FILE` saves a mouse's on-board memory; `restore FILE` puts it back.
 
 ## Layout notes (format 7)
 `0x00` wireless rate index · `0x01` wired rate index · `0x02` default DPI idx · `0x03` shift idx ·
@@ -89,5 +89,5 @@ Live DPI changes (feature 0x2202 setDpi) are refused in on-board mode (HID++ err
 switches to host mode while previewing and back to on-board mode afterwards.
 
 ## License
-GPL-3.0-or-later. openLogiMice is an independent project and is not affiliated with or endorsed
+GPL-3.0-or-later. OpenGMice is an independent project and is not affiliated with or endorsed
 by Logitech. Logitech, G HUB and LIGHTSPEED are trademarks of Logitech.

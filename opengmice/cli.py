@@ -1,4 +1,4 @@
-"""Command line access: `python -m openlogimice info|dpi N|backup FILE|restore FILE`."""
+"""Command line access: `python -m opengmice info|dpi N|backup FILE|restore FILE`."""
 from __future__ import annotations
 
 import argparse
@@ -11,16 +11,16 @@ from .mouse import Mouse, discover_mice
 from .profiles import crc_ok
 
 
-RULE_FILE = "42-openlogimice.rules"
+RULE_FILE = "42-opengmice.rules"
 
 
 def udev_rule() -> str:
-    """The rule shipped next to the package (repo root, or /app/share/openlogimice in the Flatpak)."""
+    """The rule shipped next to the package (repo root, or /app/share/opengmice in the Flatpak)."""
     return (Path(__file__).resolve().parent.parent / RULE_FILE).read_text()
 
 
 def udev_install_command() -> str:
-    run = f"flatpak run {os.environ['FLATPAK_ID']}" if os.environ.get("FLATPAK_ID") else "python3 -m openlogimice"
+    run = f"flatpak run {os.environ['FLATPAK_ID']}" if os.environ.get("FLATPAK_ID") else "python3 -m opengmice"
     return (f"{run} udev-rule | sudo tee /etc/udev/rules.d/{RULE_FILE} && "
             "sudo udevadm control --reload && sudo udevadm trigger")
 
@@ -48,7 +48,7 @@ def _open(match: str | None) -> Mouse:
 
 
 def main(argv):
-    ap = argparse.ArgumentParser(prog="openlogimice")
+    ap = argparse.ArgumentParser(prog="opengmice")
     ap.add_argument("-d", "--device", help="pick a mouse by part of its name or product id, e.g. 'G305 X' or 4074")
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("list", help="list connected mice")

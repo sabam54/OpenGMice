@@ -1,12 +1,12 @@
-# Build:  flatpak run org.flatpak.Builder --user --install --force-clean build-dir io.github.sabam54.openLogiMice.yml
+# Build:  flatpak run org.flatpak.Builder --user --install --force-clean build-dir io.github.sabam54.OpenGMice.yml
 # Bundle: see packaging/build-flatpak.sh
-id: io.github.sabam54.openLogiMice
+id: io.github.sabam54.OpenGMice
 runtime: org.kde.Platform
 runtime-version: '6.11'
 sdk: org.kde.Sdk
 base: io.qt.PySide.BaseApp
 base-version: '6.11'
-command: openlogimice
+command: opengmice
 finish-args:
   - --share=ipc
   - --socket=wayland
@@ -28,30 +28,30 @@ cleanup:
   - /bin/shiboken6*
   - /cleanup-BaseApp*.sh
 modules:
-  - name: openlogimice
+  - name: opengmice
     buildsystem: simple
     build-commands:
-      - install -Dm644 -t /app/share/openlogimice/openlogimice openlogimice/*.py
-      - python3 -m compileall -q /app/share/openlogimice
-      - install -Dm755 openlogimice.sh /app/bin/openlogimice
+      - install -Dm644 -t /app/share/opengmice/opengmice opengmice/*.py
+      - python3 -m compileall -q /app/share/opengmice
+      - install -Dm755 opengmice.sh /app/bin/opengmice
       - install -Dm644 -t /app/share/applications ${FLATPAK_ID}.desktop
       - install -Dm644 -t /app/share/metainfo ${FLATPAK_ID}.metainfo.xml
       - install -Dm644 -t /app/share/icons/hicolor/scalable/apps ${FLATPAK_ID}.svg
-      - install -Dm644 -t /app/share/openlogimice 42-openlogimice.rules
+      - install -Dm644 -t /app/share/opengmice 42-opengmice.rules
       - install -Dm644 -t /app/share/licenses/${FLATPAK_ID} LICENSE
     sources:
       - type: dir
-        path: openlogimice
-        dest: openlogimice
+        path: opengmice
+        dest: opengmice
       - type: file
-        path: packaging/openlogimice.sh
+        path: packaging/opengmice.sh
       - type: file
-        path: packaging/io.github.sabam54.openLogiMice.desktop
+        path: packaging/io.github.sabam54.OpenGMice.desktop
       - type: file
-        path: packaging/io.github.sabam54.openLogiMice.metainfo.xml
+        path: packaging/io.github.sabam54.OpenGMice.metainfo.xml
       - type: file
-        path: packaging/io.github.sabam54.openLogiMice.svg
+        path: packaging/io.github.sabam54.OpenGMice.svg
       - type: file
-        path: 42-openlogimice.rules
+        path: 42-opengmice.rules
       - type: file
         path: LICENSE

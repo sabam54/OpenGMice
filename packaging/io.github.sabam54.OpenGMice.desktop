@@ -1,11 +1,11 @@
 [Desktop Entry]
 Type=Application
-Name=openLogiMice
+Name=OpenGMice
 GenericName=Gaming Mouse Settings
 Comment=Configure DPI, report rate, buttons, lighting and on-board profiles of Logitech G mice
-Exec=openlogimice
-Icon=io.github.sabam54.openLogiMice
+Exec=opengmice
+Icon=io.github.sabam54.OpenGMice
 Terminal=false
 Categories=Settings;HardwareSettings;Qt;
 Keywords=mouse;dpi;logitech;g305;lightspeed;hidpp;profiles;
-StartupWMClass=io.github.sabam54.openLogiMice
+StartupWMClass=io.github.sabam54.OpenGMice

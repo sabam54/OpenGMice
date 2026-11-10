@@ -21,8 +21,9 @@ from . import actions, hidpp, lighting
 from .mouse import Mouse, discover_mice
 from .profiles import MODE_ONBOARD, DpiStage, Profile, layout_for
 
-APP_ID = os.environ.get("FLATPAK_ID", "openlogimice")   # matches the .desktop file name
+APP_ID = os.environ.get("FLATPAK_ID", "opengmice")   # matches the .desktop file name
 ACCENT = "#00b4ff"
+LOGO_G = "#2fc9a6"   # teal, deliberately unlike any Logitech brand colour
 SHIFT = "#ff9a1f"
 BG = "#0b0d10"
 PANEL = "#14171c"
@@ -1229,7 +1230,7 @@ class BatteryWidget(QWidget):
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("openLogiMice")
+        self.setWindowTitle("OpenGMice")
         self.setWindowIcon(QIcon.fromTheme(APP_ID, QIcon.fromTheme("input-mouse")))
         self.resize(1360, 860)
         self.worker = Worker()
@@ -1244,7 +1245,7 @@ class MainWindow(QMainWindow):
         self._busy = False
         self.devices: list[dict] = []
         self._last_paths = None
-        self.settings = QSettings("openLogiMice", "openLogiMice")
+        self.settings = QSettings("OpenGMice", "OpenGMice")
         self.want_unit = self.settings.value("last_device", "")
 
         root = QWidget()
@@ -1259,8 +1260,8 @@ class MainWindow(QMainWindow):
         bar.setFixedHeight(62)
         bl = QHBoxLayout(bar)
         bl.setContentsMargins(20, 0, 20, 0)
-        logo = QLabel(f"<span style='color:{DIM};font-weight:400'>open</span>"
-                      f"<span style='color:{ACCENT};font-weight:800'>Logi</span>Mice")
+        logo = QLabel(f"<span style='color:{DIM};font-weight:400'>Open</span>"
+                      f"<span style='color:{LOGO_G};font-weight:800'>G</span>Mice")
         logo.setStyleSheet("font-size:19px; letter-spacing:1px; font-weight:700;")
         bl.addWidget(logo)
         bl.addSpacing(28)
@@ -1735,7 +1736,7 @@ class MainWindow(QMainWindow):
 
 def main():
     app = QApplication(sys.argv)
-    app.setApplicationName("openLogiMice")
+    app.setApplicationName("OpenGMice")
     app.setDesktopFileName(APP_ID)
     app.setStyleSheet(STYLE)
     w = MainWindow()

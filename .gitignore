@@ -8,4 +8,4 @@ __pycache__/
 backup*.json
 
 # local from-source launcher (contains this PC's path)
-openlogimice.desktop
+opengmice.desktop
